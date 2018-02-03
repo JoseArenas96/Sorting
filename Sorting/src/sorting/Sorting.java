@@ -7,15 +7,21 @@ package sorting;
 
 /**
  *
- * @author Jose Arenas
+ * @author Jose Arenas 14...
+ * @author Fernando Figueroa 14175
+ * @author Sebastian Arriola 11463
  */
-public class Sorting {
-
+public class Sorting 
+{
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) 
+    {
+        Comparable[] numbers = {123,41,46,25,73,46,24,51,324,123,62,547,36,8,245,143,69};
+        numbers = Sorty.gnomeSort(numbers);
+        for(Comparable n : numbers)
+            System.out.print(n + ",");
+        System.out.println();
     }
-    
 }
