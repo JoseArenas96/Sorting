@@ -1,13 +1,13 @@
 #netbeans
-nbproject/private/
-nbproject/build-impl.xml
-nbproject/genfiles.properties
-!nbproject/project.properties
-!nbproject/project.xml
-build/
-nbbuild/
-dist/
-nbdist/
+Sorting/nbproject/private/
+Sorting/nbproject/build-impl.xml
+Sorting/nbproject/genfiles.properties
+!Sorting/nbproject/project.properties
+!Sorting/nbproject/project.xml
+Sorting/build/
+Sorting/nbbuild/
+Sorting/dist/
+Sorting/nbdist/
 .nb-gradle/
 
 #java
