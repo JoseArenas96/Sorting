@@ -45,7 +45,7 @@ public class Sorty
      * @param L
      * @return 
      */
-    public List<Comparable> mergeSort(List<Comparable> L)
+    public static Comparable[] mergeSort(Comparable[] L)
     {
         return null;
     }
@@ -56,7 +56,7 @@ public class Sorty
      * @param L
      * @return 
      */
-    public List<Comparable> quickSort(List<Comparable> L)
+    public static Comparable [] quickSort(Comparable[] L)
     {
         return null;
     }
@@ -67,7 +67,7 @@ public class Sorty
      * @param L
      * @return 
      */
-    public List<Comparable> radixSort(List<Comparable> L)
+    public static Comparable[] radixSort(Comparable[] L)
     {
         return null;
     }
