@@ -1,5 +1,7 @@
-nbproject/*
-core
+#netbeans
+nbproject/private/
+nbproject/build-impl.xml
+nbproject/genfiles.properties
 !nbproject/project.properties
 !nbproject/project.xml
 build/
@@ -7,4 +9,9 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+#java
 *.class
+
+#who knows
+core
