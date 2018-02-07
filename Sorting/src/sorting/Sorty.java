@@ -109,9 +109,9 @@ public class Sorty
         if(left >= right) return;
         // encontrar indice del pivote
         int pivot = quickSortPartition(data, left, right);
-        // recursively sort the left part of array
+        // ordenar la parte izquierda del arreglo recursivamente
         quickSortRecursive(data, left, pivot - 1);
-        // recursively sort right part of the array
+        // ordenar la parte derecha del arreglo recursivamente
         quickSortRecursive(data, pivot + 1, right);
     }
     
