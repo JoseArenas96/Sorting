@@ -18,9 +18,32 @@ public class Sorting
      */
     public static void main(String[] args) 
     {
-        Comparable[] numbers = {123,41,46,25,73,46,24,51,324,123,62,547,36,8,245,143,69};
-        numbers = Sorty.gnomeSort(numbers);
-        for(Comparable n : numbers)
+        try
+        {
+            System.in.read();
+        }
+        catch(Exception e) {System.out.println(e.getMessage());}
+        
+        Comparable[] originalN = {123,41,46,25,73,46,24,51,324,123,62,547,36,8,245,143,69};
+        Comparable[] workArray = null;
+        // probar gnomeSort
+        workArray = originalN;
+        Sorty.gnomeSort(workArray);
+        System.out.println("Arreglo ordenado con gnomeSort...");
+        for(Comparable n : workArray)
+            System.out.print(n + ",");
+        System.out.println();
+        
+        try
+        {
+            System.in.read();
+        }
+        catch(Exception e) {System.out.println(e.getMessage());}
+        // probar quickSort
+        workArray = originalN;
+        Sorty.quickSort(workArray);
+        System.out.println("Arreglo ordenado con quickSort...");
+        for(Comparable n : workArray)
             System.out.print(n + ",");
         System.out.println();
     }
