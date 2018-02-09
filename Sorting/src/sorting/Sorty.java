@@ -146,5 +146,20 @@ public class Sorty
             if(left < right) swap(data, left, right--);
             else return left; // retornamos left, la posicion final del pivote
         }
-    }
+   }
+   public static void selectionSort(Comparable[] miArray){
+       for (int i = 0; i<miArray.length-1; i++){
+           int minimo = i;
+           for(int j = i+1; j < miArray.length;j++){
+               if (miArray[j].compareTo (miArray[minimo])<0){
+                   minimo = j;
+                }
+           }
+           
+           swap(miArray,i,minimo);
+           
+          
+       }   
+   }
 }
+
