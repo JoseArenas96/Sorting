@@ -5,9 +5,20 @@
  */
 package sorting;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
 /**
  *
- * @author Jose Arenas 14...
+ * @author Jose Arenas 14470
  * @author Fernando Figueroa 14175
  * @author Sebastian Arriola 11463
  */
@@ -16,35 +27,81 @@ public class Sorting
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) 
+     public static void main(String[] args) 
+    {   
+        Integer numberOfElements = 10;
+        try
+        {
+            System.out.println("Introducir numero de elementos: ");
+            numberOfElements = new Scanner(System.in).nextInt();
+        } catch(Exception e){ }
+        
+        try
+        {
+            System.out.println("Press key to start loop.");
+            System.in.read();
+        } catch(Exception e){}
+            
+            Comparable[] numbers = null;
+            Comparable[] workArray = null;
+            try
+            {
+                writeRandomIntegersToFile("src/file.txt", numberOfElements);
+                numbers = readIntegersFromFile("src/file.txt");
+            }
+            catch(IOException e) 
+            {
+                System.out.println(e.getMessage());
+            }
+            
+//            workArray = numbers;
+//            Sorty.gnomeSort(workArray);
+            
+//            workArray = numbers;
+//            Arrays.sort(workArray);
+//            Sorty.quickSort(workArray);
+
+            workArray = numbers;
+            Arrays.sort(workArray);
+            Sorty.selectionSort(workArray);
+}    
+    
+    // write random integers to file, one per line
+    public static void writeRandomIntegersToFile(String path, int amount)
+            throws IOException
     {
+        FileWriter writer = null;
         try
         {
-            System.in.read();
+            Random r = new Random();
+            File f = new File(path);
+            f.createNewFile();
+            writer = new FileWriter(path);
+            for(int i = 0; i < amount; i++)
+                writer.write(String.valueOf(r.nextInt()) + "\n");
         }
-        catch(Exception e) {System.out.println(e.getMessage());}
-        
-        Comparable[] originalN = {123,41,46,25,73,46,24,51,324,123,62,547,36,8,245,143,69};
-        Comparable[] workArray = null;
-        // probar gnomeSort
-        workArray = originalN;
-        Sorty.gnomeSort(workArray);
-        System.out.println("Arreglo ordenado con gnomeSort...");
-        for(Comparable n : workArray)
-            System.out.print(n + ",");
-        System.out.println();
-        
+        finally
+        {
+            if(writer != null)
+            {
+                writer.flush();
+                writer.close();
+            }
+        }
+    }
+    
+    public static Comparable[] readIntegersFromFile(String path)
+            throws IOException
+    {
+        Comparable[] array = null;
         try
         {
-            System.in.read();
+            List<String> list = Files.readAllLines(Paths.get(path), Charset.defaultCharset());
+            array = new Comparable[list.size()];
+            array = list.toArray(array);
         }
-        catch(Exception e) {System.out.println(e.getMessage());}
-        // probar quickSort
-        workArray = originalN;
-        Sorty.quickSort(workArray);
-        System.out.println("Arreglo ordenado con quickSort...");
-        for(Comparable n : workArray)
-            System.out.print(n + ",");
-        System.out.println();
+        catch(IOException e) {}
+        
+        return array;
     }
 }
