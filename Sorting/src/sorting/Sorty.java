@@ -6,7 +6,9 @@
  */
 package sorting;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  *
@@ -51,9 +53,62 @@ public class Sorty
      * @param L
      * @return 
      */
-    public static Comparable[] mergeSort(Comparable[] L)
+    public static void mergeSort(Comparable[] L)
     {
-        return null;
+        mergeSortRecursivo(L, new Comparable[L.length], 0, L.length - 1);
+    }
+    
+    /**
+     * 
+     * @param data
+     * @param aux
+     * @param low
+     * @param high 
+     */
+    private static void mergeSortRecursivo(Comparable[] data, Comparable[] aux,
+            int low, int high)
+    {
+        // caso base, se trata de un unico elemento 
+        int n = high - low + 1;
+        int mid = low + n/2;
+        if(n < 2) return;
+        // computar el indice que parte a la mitad esta particion del arreglo
+        // copiar la mitad inferior de data al arreglo auxiliar
+        for(int i = low; i < mid; i++) aux[i] = data[i];
+        // llamada recursiva para la mitad inferior del arreglo
+        mergeSortRecursivo(aux, data, low, mid-1);
+        // llamada recursiva para la mitad superior del arreglo
+        mergeSortRecursivo(data, aux, mid, high);
+        // juntar ambas mitades
+        merge(data, aux, low, mid, high);
+    }
+    
+    /**
+     * Se asume que la mitad superior de data esta en orden ascendente y la
+     * mitad inferior del arreglo auxiliar esta en orden ascendente.
+     * @param data
+     * @param aux
+     * @param low
+     * @param mid
+     * @param high
+     */
+    private static void merge(Comparable[] data, Comparable[] aux, int low, 
+            int mid, int high)
+    {
+        int resIndex = low;
+        int auxIndex = low;
+        int desIndex = mid;
+        while(auxIndex < mid && desIndex <= high)
+        {
+            // el valor menor esta ubicado en data
+            if(data[desIndex].compareTo(aux[auxIndex]) < 0)
+                data[resIndex++] = data[desIndex++];
+            // el valor menor esta ubicado en aux
+            else data[resIndex++] = aux[auxIndex++];
+        }
+        // copiar lo que resta del arreglo auxiliar al arreglo data
+        while(auxIndex < mid)
+            data[resIndex++] = aux[auxIndex++];
     }
     
     
@@ -70,13 +125,66 @@ public class Sorty
     
     
     /**
-     * 
+     * Ordena el arreglo utilizando el algoritmo radixSort. Debido a que limitamos
+     * el input a un arreglo de Integer, un numero puede tener como maximo 10
+     * digitos. Es por eso que el loop for corre 10 veces, una vez por digito.
      * @param L
      * @return 
      */
-    public static Comparable[] radixSort(Comparable[] L)
+    public static void radixSort(Integer[] L)
     {
-        return null;
+        for(int i = 0; i < 10; i++)
+        {
+            arrayACubetas(L, i);
+        }
+    }
+    
+    /**
+     * Toma el arreglo proveido y lo distribuye en 10 cubetas, dependiendo del
+     * valor de pos, que indica que digito de cada numero se esta analizando.
+     * @param datos
+     * @param pos 
+     */
+    private static void arrayACubetas(Integer[] datos, int pos)
+    {
+        ArrayList<ArrayList<Integer>> cubeta = new ArrayList<ArrayList<Integer>>(10);
+        for(int i = 0; i < 10; i++)
+        {
+            cubeta.add(new ArrayList<Integer>(10));
+        }
+        // agregar a la cubeta correcta el numero que estamos evaluando
+        for(Integer i : datos)
+        {
+            int digit = digitAtPos(i, pos);
+            cubeta.get(digit).add(i);
+        }
+        int n = datos.length - 1;
+        // vaciar cubetas en el arreglo
+        for(int i = 9; i >= 0; i--)
+        {
+            while(!cubeta.get(i).isEmpty())
+            {
+                datos[n] = cubeta.get(i).remove(cubeta.get(i).size()-1);
+                n--;
+            }
+        }
+    }
+    
+    /**
+     * Devuelve el digito en la posicion especificada del numero especificado.
+     * @param number
+     * @param position
+     * @return 
+     */
+    private static int digitAtPos(int number, int position)
+    {
+        /* si se requiere el ultimo digito, se obtiene al realizar la operacion
+           number mod 10 */
+        if(position == 0) return number % 10;
+        /* si se requiere otro digito que no es el ultimo, realizamos una llamada
+           recursiva quitandole el ultimo digito al numero con la operacion
+           number / 10 */
+        else return digitAtPos(number / 10, position - 1);
     }
     
     // TODO: implementar otro algoritmo de sorting.
